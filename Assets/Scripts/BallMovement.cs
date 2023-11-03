@@ -86,8 +86,7 @@ public class BallMovement : MonoBehaviour
                         canMove = true;
                         return;
                     }
-                    audioSource.clip = hitTheWall;
-                    audioSource.Play();
+                    SoundFXManager.instance.PlaySoundFXClip(hitTheWall, transform, 1f);
                     //else
                     steps = i;
                     targetPosition = hits[i - 1].transform.position;
@@ -98,7 +97,7 @@ public class BallMovement : MonoBehaviour
             float moveDuration = stepDuration * steps;
             transform
                 .DOMove(targetPosition, moveDuration)
-                .SetEase(Ease.OutExpo)
+                .SetEase(Ease.OutBounce)
                 .OnComplete(() => canMove = true);
 
             if (onMoveStart != null)

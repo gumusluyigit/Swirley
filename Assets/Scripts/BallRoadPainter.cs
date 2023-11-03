@@ -47,8 +47,7 @@ public class BallRoadPainter : MonoBehaviour
                 if(paintedRoadTiles == levelManager.roadTilesList.Count)
                 {
                     Debug.Log("Level Completed");
-                    audioSource.clip = win;
-                    audioSource.Play();
+                    SoundFXManager.instance.PlaySoundFXClip(win, transform, 1f);
                     //Load new level
                 }
             }
