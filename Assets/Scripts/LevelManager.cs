@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Level texture")]
     [SerializeField] private Texture2D levelTexture;
 
+    [Header("Tiles Prefabs")]
     [SerializeField] private GameObject prefabWallTile;
     [SerializeField] private GameObject prefabRoadTile;
 

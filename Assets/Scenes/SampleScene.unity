@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d674f56a985f1494f95face46382d00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTexture: {fileID: 2800000, guid: dad9a04d3443d8546b076b641b548c82, type: 3}
+  levelTexture: {fileID: 2800000, guid: fcab2caf096f7e54197696c6df306907, type: 3}
   prefabWallTile: {fileID: 2184476283049250506, guid: f56db0dc186a1884eb71cd2a313b62e8, type: 3}
   prefabRoadTile: {fileID: 4385788258928004003, guid: 419e817983e2cd04583ae719b46c0d4c, type: 3}
   paintColor: {r: 1, g: 0, b: 0.17708778, a: 0}

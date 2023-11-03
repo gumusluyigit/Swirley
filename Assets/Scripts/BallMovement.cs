@@ -57,10 +57,9 @@ public class BallMovement : MonoBehaviour
             canMove = false;
             //add raycast in the swipe direction (from the ball)
             RaycastHit[] hits = Physics.RaycastAll(transform.position, moveDireciton, MAX_RAY_DISTANCE, wallsAndRoadsLayer.value);
-            //hits = hits.OrderByDescending(element => element.collider.isTrigger).ToArray();
             // Sort the hits by distance from the starting point (closest first).
             System.Array.Sort(hits, (x, y) => x.distance.CompareTo(y.distance));
-            Debug.Log("Raycast koydum");
+           
 
             Vector3 targetPosition = transform.position;
 
@@ -72,8 +71,6 @@ public class BallMovement : MonoBehaviour
             {
                 if (hits[i].collider.isTrigger)
                 {
-                    Debug.Log("roadtile listeye eklendi");
-                    Debug.Log("Raycast: "+ hits[i]);
                     pathRoadTiles.Add(hits[i].transform.GetComponent<RoadTile>());
                 }
 
@@ -81,16 +78,12 @@ public class BallMovement : MonoBehaviour
                 {
                     if(i == 0)
                     {
-                        Debug.Log("hareket edemiyom");
                         canMove = true;
                         return;
                     }
                     //else
                     steps = i;
-                    Debug.Log("Steps:" + steps);
                     targetPosition = hits[i - 1].transform.position;
-                    Debug.Log("Targer Pos:" + targetPosition);
-
                     break;
                 }
             }
