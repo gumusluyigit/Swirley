@@ -8,12 +8,19 @@ public class BallRoadPainter : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private BallMovement ballMovement;
     [SerializeField] private MeshRenderer ballMeshRenderer;
+    [SerializeField] private AudioClip win;
+
+    private AudioSource audioSource;
+
+
 
     public int paintedRoadTiles = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        audioSource = GetComponent<AudioSource>();
         //paint ball
         ballMeshRenderer.material.color = levelManager.paintColor;
 
@@ -40,6 +47,8 @@ public class BallRoadPainter : MonoBehaviour
                 if(paintedRoadTiles == levelManager.roadTilesList.Count)
                 {
                     Debug.Log("Level Completed");
+                    audioSource.clip = win;
+                    audioSource.Play();
                     //Load new level
                 }
             }

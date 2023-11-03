@@ -17,6 +17,10 @@ public class BallMovement : MonoBehaviour
 
     public UnityAction<List<RoadTile>, float> onMoveStart;
 
+    [SerializeField] private AudioClip hitTheWall;
+
+    private AudioSource audioSource;
+
     private Vector3 moveDireciton;
     private bool canMove = true;
 
@@ -24,6 +28,7 @@ public class BallMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         //change default ball position
         transform.position = levelManager.defaultBallRoadTile.position;
 
@@ -81,6 +86,8 @@ public class BallMovement : MonoBehaviour
                         canMove = true;
                         return;
                     }
+                    audioSource.clip = hitTheWall;
+                    audioSource.Play();
                     //else
                     steps = i;
                     targetPosition = hits[i - 1].transform.position;
@@ -95,7 +102,7 @@ public class BallMovement : MonoBehaviour
                 .OnComplete(() => canMove = true);
 
             if (onMoveStart != null)
-                onMoveStart.Invoke(pathRoadTiles, moveDuration);
+                onMoveStart.Invoke(pathRoadTiles, moveDuration);          
         }
     }
 
