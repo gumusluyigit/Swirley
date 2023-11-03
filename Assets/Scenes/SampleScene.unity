@@ -366,6 +366,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 64, y: 0, z: 0}
+--- !u!1 &904917784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 904917786}
+  - component: {fileID: 904917785}
+  m_Layer: 0
+  m_Name: event system
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &904917785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904917784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &904917786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904917784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413044620
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,9 +511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d674f56a985f1494f95face46382d00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTexture: {fileID: 2800000, guid: b9809f0223caf204195e67821a8eac9c, type: 3}
+  levelTexture: {fileID: 2800000, guid: dad9a04d3443d8546b076b641b548c82, type: 3}
   prefabWallTile: {fileID: 2184476283049250506, guid: f56db0dc186a1884eb71cd2a313b62e8, type: 3}
   prefabRoadTile: {fileID: 4385788258928004003, guid: 419e817983e2cd04583ae719b46c0d4c, type: 3}
+  paintColor: {r: 1, g: 0, b: 0.17708778, a: 0}
   roadTilesList: []
   defaultBallRoadTile: {fileID: 0}
 --- !u!1 &1798450760
@@ -553,6 +601,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 63, y: 0, z: 0}
+--- !u!1 &1983825122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1384383705771366542, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+  m_PrefabInstance: {fileID: 595437934}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1983825123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+  m_PrefabInstance: {fileID: 595437934}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983825122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1415327d403a92042972cf6e7615e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!23 &1983825124 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1164678445392219093, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+  m_PrefabInstance: {fileID: 595437934}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1983825127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983825122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9726b5486bbeda34cb78f0040239461b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 1527351554}
+  ballMovement: {fileID: 1983825123}
+  ballMeshRenderer: {fileID: 1983825124}
+  paintedRoadTiles: 0
 --- !u!1 &2128634547
 GameObject:
   m_ObjectHideFlags: 0

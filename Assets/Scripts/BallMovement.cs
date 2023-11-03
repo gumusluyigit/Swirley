@@ -4,7 +4,7 @@ using UnityEngine;
 using GG.Infrastructure.Utils.Swipe;
 using DG.Tweening;
 using UnityEngine.Events;
-
+using System.Linq;
 
 public class BallMovement : MonoBehaviour
 {
@@ -13,19 +13,20 @@ public class BallMovement : MonoBehaviour
 
     [SerializeField] private float stepDuration = 0.1f;
     [SerializeField] private LayerMask wallsAndRoadsLayer;
-    private const float MAX_RAY_DISTANCE = 10f;
+    private const float MAX_RAY_DISTANCE = 100f;
 
     public UnityAction<List<RoadTile>, float> onMoveStart;
 
-    private Vector3 moveDirection;
+    private Vector3 moveDireciton;
     private bool canMove = true;
 
-    private Vector3 moveDireciton;
+    
     // Start is called before the first frame update
     void Start()
     {
         //change default ball position
         transform.position = levelManager.defaultBallRoadTile.position;
+
         swipeListener.OnSwipe.AddListener(swipe => { 
             switch(swipe)
             {
@@ -56,6 +57,9 @@ public class BallMovement : MonoBehaviour
             canMove = false;
             //add raycast in the swipe direction (from the ball)
             RaycastHit[] hits = Physics.RaycastAll(transform.position, moveDireciton, MAX_RAY_DISTANCE, wallsAndRoadsLayer.value);
+            //hits = hits.OrderByDescending(element => element.collider.isTrigger).ToArray();
+            // Sort the hits by distance from the starting point (closest first).
+            System.Array.Sort(hits, (x, y) => x.distance.CompareTo(y.distance));
             Debug.Log("Raycast koydum");
 
             Vector3 targetPosition = transform.position;
@@ -63,11 +67,13 @@ public class BallMovement : MonoBehaviour
             int steps = 0;
 
             List<RoadTile> pathRoadTiles = new List<RoadTile>(); 
+
             for (int i = 0; i < hits.Length; i++)
             {
                 if (hits[i].collider.isTrigger)
                 {
                     Debug.Log("roadtile listeye eklendi");
+                    Debug.Log("Raycast: "+ hits[i]);
                     pathRoadTiles.Add(hits[i].transform.GetComponent<RoadTile>());
                 }
 
@@ -84,6 +90,7 @@ public class BallMovement : MonoBehaviour
                     Debug.Log("Steps:" + steps);
                     targetPosition = hits[i - 1].transform.position;
                     Debug.Log("Targer Pos:" + targetPosition);
+
                     break;
                 }
             }
