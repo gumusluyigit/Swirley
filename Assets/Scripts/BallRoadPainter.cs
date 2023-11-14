@@ -10,9 +10,9 @@ public class BallRoadPainter : MonoBehaviour
     [SerializeField] private MeshRenderer ballMeshRenderer;
     [SerializeField] private AudioClip win;
 
+    [SerializeField] private GameObject winPanel;
+
     private AudioSource audioSource;
-
-
 
     public int paintedRoadTiles = 0;
 
@@ -46,7 +46,9 @@ public class BallRoadPainter : MonoBehaviour
                 //check for completion
                 if(paintedRoadTiles == levelManager.roadTilesList.Count)
                 {
+                    
                     Debug.Log("Level Completed");
+                    winPanel.SetActive(true);
                     SoundFXManager.instance.PlaySoundFXClip(win, transform, 1f);
                     //Load new level
                 }
@@ -64,6 +66,7 @@ public class BallRoadPainter : MonoBehaviour
         roadTile.isPainted = true;
         paintedRoadTiles++;
     }
+
 
 
     // Update is called once per frame

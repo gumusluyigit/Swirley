@@ -271,6 +271,50 @@ PrefabInstance:
       propertyPath: swipeListener
       value: 
       objectReference: {fileID: 1413044621}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].time
+      value: 0.8446161
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].value
+      value: 1.0607567
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].inSlope
+      value: 0.13143034
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].inWeight
+      value: 0.25015244
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].outSlope
+      value: 0.13143034
+      objectReference: {fileID: 0}
+    - target: {fileID: 183027406, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 1384383705771366542, guid: bd03c5e2b2cbe1a469056ca029bcf605, type: 3}
       propertyPath: m_Name
       value: Ball

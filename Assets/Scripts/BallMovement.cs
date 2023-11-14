@@ -19,6 +19,8 @@ public class BallMovement : MonoBehaviour
 
     [SerializeField] private AudioClip hitTheWall;
 
+    public AnimationCurve moveCurve;
+
     private AudioSource audioSource;
 
     private Vector3 moveDireciton;
@@ -97,7 +99,7 @@ public class BallMovement : MonoBehaviour
             float moveDuration = stepDuration * steps;
             transform
                 .DOMove(targetPosition, moveDuration)
-                .SetEase(Ease.OutBounce)
+                .SetEase(moveCurve)
                 .OnComplete(() => canMove = true);
 
             if (onMoveStart != null)
