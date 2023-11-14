@@ -50,14 +50,13 @@ public class LevelManager : MonoBehaviour
 
     private void LoadLevels()
     {
-        // Load your levels from JSON files and populate the 'levels' list
         levels = new List<LevelData>();
 
         LevelData level1 = LoadLevelDataFromJSON("Level1.json");
         if (level1 != null)
         {
             levels.Add(level1);
-            Debug.Log("Level 1 loaded successfully.");
+            Debug.Log("Level 1 loaded successfully. Tiles count: " + level1.tiles.Count);
         }
         else
         {
@@ -88,7 +87,16 @@ public class LevelManager : MonoBehaviour
             string jsonContent = System.IO.File.ReadAllText(jsonFilePath);
             LevelData levelData = JsonUtility.FromJson<LevelData>(jsonContent);
 
-            return levelData;
+            if (levelData != null)
+            {
+                Debug.Log("Successfully loaded LevelData from JSON.");
+                return levelData;
+            }
+            else
+            {
+                Debug.LogError("Failed to deserialize LevelData from JSON.");
+                return null;
+            }
         }
         else
         {
@@ -96,6 +104,7 @@ public class LevelManager : MonoBehaviour
             return null;
         }
     }
+
 
 
     private void LoadLevel(int levelIndex)
@@ -108,10 +117,35 @@ public class LevelManager : MonoBehaviour
         unitPerPixel = prefabWallTile.transform.lossyScale.x;
         float halfUnitPerPixel = unitPerPixel / 2f;
 
-        // ... (rest of the level loading logic)
+        for (int row = 0; row < levelData.height; row++)
+        {
+            for (int col = 0; col < levelData.width; col++)
+            {
+                if (levelData != null && levelData.tiles != null)
+                {
+                    int tileValue = levelData.tiles[row][col];
+                    Vector3 position = new Vector3(col * unitPerPixel - halfUnitPerPixel, 0f, row * unitPerPixel - halfUnitPerPixel);
 
-        // You can also perform any specific actions or setup for the current level here
-    }
+                    if (tileValue == 1) // Assuming 1 represents a wall tile
+                    {
+                        Spawn(prefabWallTile, position);
+                    }
+                    else if (tileValue == 0) // Assuming 0 represents a road tile
+                    {
+                        Spawn(prefabRoadTile, position);
+                    }
+                    // Add more conditions if you have other tile types
+
+                    // ... (rest of the logic, if needed)
+                }
+                else
+                {
+                    Debug.LogError("LevelData or tiles list is null.");
+                }
+            }
+        }
+            // You can also perform any specific actions or setup for the current level here
+        }
 
     private void ClearLevel()
     {
@@ -148,8 +182,22 @@ public class LevelManager : MonoBehaviour
         GameObject obj = Instantiate(prefabTile, position, Quaternion.identity, transform);
 
         if (prefabTile == prefabRoadTile)
-            roadTilesList.Add(obj.GetComponent<RoadTile>());
+        {
+            RoadTile roadTileComponent = obj.GetComponent<RoadTile>();
+            if (roadTileComponent != null)
+            {
+                roadTilesList.Add(roadTileComponent);
+                Debug.Log("Road tile added to roadTilesList.");
+            }
+            else
+            {
+                Debug.LogError("Road tile prefab is missing RoadTile component.");
+            }
+        }
+        else
+            Debug.LogError("prefabtitle ve prefabroadtitle ayný deðil");
     }
+
 
     // Start is called before the first frame update
     void Start()
