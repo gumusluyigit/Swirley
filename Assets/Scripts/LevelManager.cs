@@ -8,7 +8,7 @@ public class LevelData
     public string name;
     public int width;
     public int height;
-    public List<List<int>> tiles;
+    public int[,] tiles;
 }
 
 public class LevelManager : MonoBehaviour
@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
         if (level1 != null)
         {
             levels.Add(level1);
-            Debug.Log("Level 1 loaded successfully. Tiles count: " + level1.tiles.Count);
+
         }
         else
         {
@@ -80,7 +80,7 @@ public class LevelManager : MonoBehaviour
 
     private LevelData LoadLevelDataFromJSON(string jsonFileName)
     {
-        string jsonFilePath = Application.dataPath + "/" + jsonFileName;
+        string jsonFilePath = Application.dataPath + "/Resources/Levels/" + jsonFileName;
 
         if (System.IO.File.Exists(jsonFilePath))
         {
@@ -123,7 +123,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (levelData != null && levelData.tiles != null)
                 {
-                    int tileValue = levelData.tiles[row][col];
+                    int tileValue = levelData.tiles[row, col];
                     Vector3 position = new Vector3(col * unitPerPixel - halfUnitPerPixel, 0f, row * unitPerPixel - halfUnitPerPixel);
 
                     if (tileValue == 1) // Assuming 1 represents a wall tile
