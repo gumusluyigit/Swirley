@@ -8,7 +8,17 @@ public class LevelData
     public string name;
     public int width;
     public int height;
-    public int[,] tiles;
+    public int[][] tiles;
+
+    public LevelData()
+    {
+        // Initialize tiles array
+        tiles = new int[height][];
+        for (int i = 0; i < height; i++)
+        {
+            tiles[i] = new int[width];
+        }
+    }
 }
 
 public class LevelManager : MonoBehaviour
@@ -123,7 +133,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (levelData != null && levelData.tiles != null)
                 {
-                    int tileValue = levelData.tiles[row, col];
+                    int tileValue = levelData.tiles[row][col];
                     Vector3 position = new Vector3(col * unitPerPixel - halfUnitPerPixel, 0f, row * unitPerPixel - halfUnitPerPixel);
 
                     if (tileValue == 1) // Assuming 1 represents a wall tile
