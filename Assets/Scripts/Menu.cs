@@ -8,11 +8,17 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject levelComplete;
 
+    public void OnMenuButon()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void OnPlayButton()
     {
         SceneManager.LoadScene(1);
     }
 
+    
     public void OnQuitButton()
     {
         Application.Quit();
@@ -21,6 +27,7 @@ public class Menu : MonoBehaviour
     {
         // Find the LevelManager object in the scene
         LevelManager levelManager = FindObjectOfType<LevelManager>();
+        levelManager.ClearLevel();
 
         // If LevelManager is found, call the LoadLevel method
         if (levelManager != null)

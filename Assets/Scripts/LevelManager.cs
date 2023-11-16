@@ -20,13 +20,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject prefabWallTile;
     [SerializeField] private GameObject prefabRoadTile;
 
-    [SerializeField] private Transform plane;
+    [SerializeField] private Vector2 offset;
 
     [Header("Ball and Road paint color")]
     public Color paintColor;
 
     [HideInInspector] public List<RoadTile>  roadTilesList = new List<RoadTile>();
     [HideInInspector] public RoadTile defaultBallRoadTile;
+
+    [HideInInspector] public List<GameObject> wallTilesList = new List<GameObject>();
+
 
     private Color colorWall = Color.white;
     private Color colorRoad = Color.black;
@@ -79,6 +82,16 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Failed to load Level 2.");
         }
 
+        LevelData level3 = LoadLevelDataFromJSON("Level3.json");
+        if (level3 != null)
+        {
+            levels.Add(level3);
+            Debug.Log("Level 3 loaded successfully.");
+        }
+        else
+        {
+            Debug.LogError("Failed to load Level 3.");
+        }
         // Add more levels as needed
     }
 
@@ -124,6 +137,9 @@ public class LevelManager : MonoBehaviour
         unitPerPixel = prefabWallTile.transform.lossyScale.x;
         float halfUnitPerPixel = unitPerPixel / 2f;
 
+        // Calculate the offset based on the level index
+       // float xOffset = levelIndex * levelData.width * unitPerPixel;
+
         for (int row = 0; row < levelData.height; row++)
         {
             for (int col = 0; col < levelData.width; col++)
@@ -132,8 +148,13 @@ public class LevelManager : MonoBehaviour
                 {
                     Debug.Log($"Checking tile at row: {row}, col: {col}, value: {levelData.tiles[row, col]}");
                     int tileValue = levelData.tiles[row, col];
-                    Vector3 position = new Vector3(col * unitPerPixel - halfUnitPerPixel, 0f, row * unitPerPixel - halfUnitPerPixel);
-                    Debug.Log($"First Tile Position: {position}, Tile Value: {tileValue}");
+                    // Calculate the automatic offset to center the level
+                    var autoOffsetX = -((levelData.width - 1) * unitPerPixel + halfUnitPerPixel) / 2f;
+                    var autoOffsetY = -((levelData.height - 1) * unitPerPixel + halfUnitPerPixel) / 2f;
+
+                    // Combine the serialized offset and automatic offset
+                    Vector3 position = new Vector3((col * unitPerPixel - halfUnitPerPixel) + offset.x + autoOffsetX, 0f, row * unitPerPixel - halfUnitPerPixel + offset.y + autoOffsetY);
+                    Debug.Log($"Tile Position: {position}, Tile Value: {tileValue}, AutoOffsetX: {autoOffsetX}, AutoOffsetY: {autoOffsetY}");
 
                     if (tileValue == 1) // Assuming 1 represents a wall tile
                     {
@@ -156,13 +177,24 @@ public class LevelManager : MonoBehaviour
             // You can also perform any specific actions or setup for the current level here
         }
 
-    private void ClearLevel()
+    public void ClearLevel()
     {
-        // Destroy existing level objects or perform any cleanup
-        // ...
+        // Destroy existing road tiles
+        foreach (RoadTile roadTile in roadTilesList)
+        {
+            Destroy(roadTile.gameObject);
+        }
 
         // Clear the roadTilesList
         roadTilesList.Clear();
+
+        // Destroy existing wall tiles
+        foreach (GameObject wallTile in wallTilesList)
+        {
+            Destroy(wallTile);
+        }
+
+        wallTilesList.Clear();
     }
 
     private void Update()
@@ -203,8 +235,15 @@ public class LevelManager : MonoBehaviour
                 Debug.LogError("Road tile prefab is missing RoadTile component.");
             }
         }
+        else if (prefabTile == prefabWallTile)
+        {
+            wallTilesList.Add(obj);  // Add the wall tile GameObject to the list
+            Debug.Log("Wall tile GameObject added to wallTilesList.");
+        }
         else
-            Debug.LogError("prefabtitle ve prefabroadtitle ayný deðil");
+        {
+            Debug.LogError("Prefab type not recognized.");
+        }
     }
 
 
