@@ -1,5 +1,7 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,17 +10,7 @@ public class LevelData
     public string name;
     public int width;
     public int height;
-    public int[][] tiles;
-
-    public LevelData()
-    {
-        // Initialize tiles array
-        tiles = new int[height][];
-        for (int i = 0; i < height; i++)
-        {
-            tiles[i] = new int[width];
-        }
-    }
+    public int[,] tiles;
 }
 
 public class LevelManager : MonoBehaviour
@@ -27,6 +19,8 @@ public class LevelManager : MonoBehaviour
     [Header("Tiles Prefabs")]
     [SerializeField] private GameObject prefabWallTile;
     [SerializeField] private GameObject prefabRoadTile;
+
+    [SerializeField] private Transform plane;
 
     [Header("Ball and Road paint color")]
     public Color paintColor;
@@ -40,7 +34,8 @@ public class LevelManager : MonoBehaviour
     private float unitPerPixel;
 
     private List<LevelData> levels;
-    private int currentLevelIndex = 0;
+    public int currentLevelIndex = 0;
+
 
     private void Awake()
     {
@@ -95,8 +90,8 @@ public class LevelManager : MonoBehaviour
         if (System.IO.File.Exists(jsonFilePath))
         {
             string jsonContent = System.IO.File.ReadAllText(jsonFilePath);
-            LevelData levelData = JsonUtility.FromJson<LevelData>(jsonContent);
-
+            LevelData levelData = JsonConvert.DeserializeObject<LevelData>(jsonContent);
+           
             if (levelData != null)
             {
                 Debug.Log("Successfully loaded LevelData from JSON.");
@@ -117,13 +112,15 @@ public class LevelManager : MonoBehaviour
 
 
 
-    private void LoadLevel(int levelIndex)
+    public void LoadLevel(int levelIndex)
     {
         // Clear previous level
         ClearLevel();
 
         // Load and generate the new level
         LevelData levelData = levels[levelIndex];
+        Debug.Log($"Loaded level: {levelData.name}, width: {levelData.width}, height: {levelData.height}");
+
         unitPerPixel = prefabWallTile.transform.lossyScale.x;
         float halfUnitPerPixel = unitPerPixel / 2f;
 
@@ -133,8 +130,10 @@ public class LevelManager : MonoBehaviour
             {
                 if (levelData != null && levelData.tiles != null)
                 {
-                    int tileValue = levelData.tiles[row][col];
+                    Debug.Log($"Checking tile at row: {row}, col: {col}, value: {levelData.tiles[row, col]}");
+                    int tileValue = levelData.tiles[row, col];
                     Vector3 position = new Vector3(col * unitPerPixel - halfUnitPerPixel, 0f, row * unitPerPixel - halfUnitPerPixel);
+                    Debug.Log($"First Tile Position: {position}, Tile Value: {tileValue}");
 
                     if (tileValue == 1) // Assuming 1 represents a wall tile
                     {
