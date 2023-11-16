@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         LoadLevels();
         LoadLevel(currentLevelIndex);
         // Check if roadTilesList is not empty before accessing elements
@@ -138,7 +139,7 @@ public class LevelManager : MonoBehaviour
         float halfUnitPerPixel = unitPerPixel / 2f;
 
         // Calculate the offset based on the level index
-       // float xOffset = levelIndex * levelData.width * unitPerPixel;
+        // float xOffset = levelIndex * levelData.width * unitPerPixel;
 
         for (int row = 0; row < levelData.height; row++)
         {
@@ -215,6 +216,7 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+
 
     private void Spawn(GameObject prefabTile, Vector3 position)
     {

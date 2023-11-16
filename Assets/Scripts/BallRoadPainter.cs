@@ -51,6 +51,7 @@ public class BallRoadPainter : MonoBehaviour
                     winPanel.SetActive(true);
                     SoundFXManager.instance.PlaySoundFXClip(win, transform, 1f);
                     //Load new level
+                    paintedRoadTiles = 0;
                 }
             }
         }

@@ -40,7 +40,5 @@ public class Menu : MonoBehaviour
         {
             Debug.LogError("LevelManager not found in the scene. Make sure it exists and is active.");
         }
-
-
     }
 }

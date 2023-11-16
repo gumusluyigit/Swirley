@@ -31,6 +31,7 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        levelManager = FindFirstObjectByType<LevelManager>();
         //change default ball position
         transform.position = levelManager.defaultBallRoadTile.position;
 
