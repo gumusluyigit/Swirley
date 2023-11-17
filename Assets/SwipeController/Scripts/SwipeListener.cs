@@ -8,7 +8,7 @@ namespace GG.Infrastructure.Utils.Swipe
     [Serializable]
     public class SwipeListenerEvent : UnityEvent<string> { }
 
-    public class SwipeListener : MonoBehaviour
+    public class SwipeListener : MonoSingleton<SwipeListener>
     {
         public UnityEvent OnSwipeCancelled;
 

@@ -10,7 +10,7 @@ public class BallRoadPainter : MonoBehaviour
     [SerializeField] private MeshRenderer ballMeshRenderer;
     [SerializeField] private AudioClip win;
 
-    [SerializeField] private GameObject winPanel;
+    [SerializeField] private Canvas winCanvas; // Reference to the Canvas component
 
     private AudioSource audioSource;
 
@@ -29,6 +29,13 @@ public class BallRoadPainter : MonoBehaviour
 
         //paint ball road
         ballMovement.onMoveStart += OnBallMoveStartHandler;
+
+        // Enable the canvas if it exists
+        if (winCanvas != null)
+        {
+            winCanvas.enabled = false;
+        }
+
     }
 
     private void OnBallMoveStartHandler(List<RoadTile> roadTiles, float totalDuration)
@@ -43,14 +50,19 @@ public class BallRoadPainter : MonoBehaviour
                 float delay = i * (stepDuration / 2f);
                 Paint(roadTile, duration, delay);
 
-                //check for completion
-                if(paintedRoadTiles == levelManager.roadTilesList.Count)
+                // Enable the canvas when the level is completed
+                if (paintedRoadTiles == levelManager.roadTilesList.Count)
                 {
-                    
                     Debug.Log("Level Completed");
-                    winPanel.SetActive(true);
+
+                    // Enable the canvas
+                    if (winCanvas != null)
+                    {
+                        winCanvas.enabled = true;
+                    }
+
                     SoundFXManager.instance.PlaySoundFXClip(win, transform, 1f);
-                    //Load new level
+                    // Load new level
                     paintedRoadTiles = 0;
                 }
             }

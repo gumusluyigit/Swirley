@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour
 {
-    public void OnLevelButtonClicked()
+    public void OnLevelButtonClicked(int index)
     {
         SceneManager.LoadScene(2);
         // Find the LevelManager object in the scene
@@ -14,13 +15,12 @@ public class LevelSelector : MonoBehaviour
         // If LevelManager is found, call the LoadLevel method with the inferred level index
         if (levelManager != null)
         {
-            levelManager.ClearLevel();
 
             // Get the sibling index of the button (assuming buttons are ordered in the hierarchy)
-            int buttonIndex = transform.GetSiblingIndex();
+            int buttonIndex = index - 1;
 
             // Load the level based on the button index (add 1 to match the level numbering)
-            levelManager.LoadLevel(buttonIndex + 1);
+            levelManager.LoadLevel(buttonIndex);
         }
         else
         {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class LevelData
@@ -17,15 +18,16 @@ public class LevelManager : MonoSingleton<LevelManager>
 {
 
     [Header("Tiles Prefabs")]
+    [SerializeField] private GameObject ball;
     [SerializeField] private GameObject prefabWallTile;
     [SerializeField] private GameObject prefabRoadTile;
-
+    public Canvas canvas;
     [SerializeField] private Vector2 offset;
 
     [Header("Ball and Road paint color")]
     public Color paintColor;
 
-    [HideInInspector] public List<RoadTile>  roadTilesList = new List<RoadTile>();
+    [HideInInspector] public List<RoadTile> roadTilesList = new List<RoadTile>();
     [HideInInspector] public RoadTile defaultBallRoadTile;
 
     [HideInInspector] public List<GameObject> wallTilesList = new List<GameObject>();
@@ -38,19 +40,11 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     protected override void Awake()
     {
-        base.Awake();
-        DontDestroyOnLoad(this);
-        LoadLevels();
-        LoadLevel(currentLevelIndex);
-        // Check if roadTilesList is not empty before accessing elements
-        if (roadTilesList.Count > 0)
+        if (LevelManager.Instance == null)
         {
-            defaultBallRoadTile = roadTilesList[0];
-        }
-        else
-        {
-            // Handle the case where roadTilesList is empty
-            Debug.LogError("No road tiles found. Make sure your level contains road tiles.");
+            base.Awake();
+            DontDestroyOnLoad(this);
+            LoadLevels();
         }
     }
 
@@ -62,7 +56,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (level1 != null)
         {
             levels.Add(level1);
-
+            Debug.Log("Level 1 loaded successfully.");
         }
         else
         {
@@ -113,7 +107,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         {
             string jsonContent = System.IO.File.ReadAllText(jsonFilePath);
             LevelData levelData = JsonConvert.DeserializeObject<LevelData>(jsonContent);
-           
+
             if (levelData != null)
             {
                 Debug.Log("Successfully loaded LevelData from JSON.");
@@ -131,7 +125,6 @@ public class LevelManager : MonoSingleton<LevelManager>
             return null;
         }
     }
-
 
 
     public void LoadLevel(int levelIndex)
@@ -180,8 +173,22 @@ public class LevelManager : MonoSingleton<LevelManager>
                 }
             }
         }
-            // You can also perform any specific actions or setup for the current level here
+        // You can also perform any specific actions or setup for the current level here
+
+
+        // Check if roadTilesList is not empty before accessing elements
+        if (roadTilesList.Count > 0)
+        {
+            defaultBallRoadTile = roadTilesList[0];
         }
+        else
+        {
+            // Handle the case where roadTilesList is empty
+            Debug.LogError("No road tiles found. Make sure your level contains road tiles.");
+        }
+
+        Instantiate(ball, transform);
+    }
 
     public void ClearLevel()
     {
@@ -257,6 +264,6 @@ public class LevelManager : MonoSingleton<LevelManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 }

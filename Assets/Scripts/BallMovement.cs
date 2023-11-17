@@ -8,7 +8,7 @@ using System.Linq;
 
 public class BallMovement : MonoBehaviour
 {
-    [SerializeField] private SwipeListener swipeListener;
+    private SwipeListener swipeListener;
 
     [SerializeField] private float stepDuration = 0.1f;
     [SerializeField] private LayerMask wallsAndRoadsLayer;
@@ -20,8 +20,6 @@ public class BallMovement : MonoBehaviour
 
     public AnimationCurve moveCurve;
 
-    private AudioSource audioSource;
-
     private Vector3 moveDireciton;
     private bool canMove = true;
 
@@ -29,31 +27,38 @@ public class BallMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        //change default ball position
-        transform.position = LevelManager.Instance.defaultBallRoadTile.position;
+        if (SwipeListener.Instance != null)
+        {
+            swipeListener = SwipeListener.Instance;
+            //change default ball position
+            transform.position = LevelManager.Instance.defaultBallRoadTile.position;
 
-        swipeListener.OnSwipe.AddListener(swipe => { 
-            switch(swipe)
-            {
-                case "Right":
-                    moveDireciton = Vector3.right;
-                    break;
+            swipeListener.OnSwipe.AddListener(swipe => {
+                switch (swipe)
+                {
+                    case "Right":
+                        moveDireciton = Vector3.right;
+                        break;
 
-                case "Left":
-                    moveDireciton = Vector3.left;
-                    break;
+                    case "Left":
+                        moveDireciton = Vector3.left;
+                        break;
 
-                case "Up":
-                    moveDireciton = Vector3.forward;
-                    break;
+                    case "Up":
+                        moveDireciton = Vector3.forward;
+                        break;
 
-                case "Down":
-                    moveDireciton = Vector3.back;
-                    break;
-            }
-            MoveBall();
-        });
+                    case "Down":
+                        moveDireciton = Vector3.back;
+                        break;
+                }
+                MoveBall();
+            });
+        }
+        else
+        {
+            Debug.LogError("SwipeListener instance is null. Make sure it's properly set up as a singleton.");
+        }
     }
 
     private void MoveBall()
