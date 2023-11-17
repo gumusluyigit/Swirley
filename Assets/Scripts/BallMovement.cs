@@ -9,7 +9,6 @@ using System.Linq;
 public class BallMovement : MonoBehaviour
 {
     [SerializeField] private SwipeListener swipeListener;
-     private LevelManager levelManager;
 
     [SerializeField] private float stepDuration = 0.1f;
     [SerializeField] private LayerMask wallsAndRoadsLayer;
@@ -31,9 +30,8 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        levelManager = FindObjectOfType<LevelManager>();
         //change default ball position
-        transform.position = levelManager.defaultBallRoadTile.position;
+        transform.position = LevelManager.Instance.defaultBallRoadTile.position;
 
         swipeListener.OnSwipe.AddListener(swipe => { 
             switch(swipe)

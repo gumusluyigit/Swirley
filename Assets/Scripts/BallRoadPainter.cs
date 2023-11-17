@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class BallRoadPainter : MonoBehaviour
 {
-    [SerializeField] private LevelManager levelManager;
+    private LevelManager levelManager;
     [SerializeField] private BallMovement ballMovement;
     [SerializeField] private MeshRenderer ballMeshRenderer;
     [SerializeField] private AudioClip win;
@@ -19,7 +19,7 @@ public class BallRoadPainter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        levelManager = LevelManager.Instance;
         audioSource = GetComponent<AudioSource>();
         //paint ball
         ballMeshRenderer.material.color = levelManager.paintColor;

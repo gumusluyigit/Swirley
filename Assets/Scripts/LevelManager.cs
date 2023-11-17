@@ -13,7 +13,7 @@ public class LevelData
     public int[,] tiles;
 }
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : MonoSingleton<LevelManager>
 {
 
     [Header("Tiles Prefabs")]
@@ -30,18 +30,15 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector] public List<GameObject> wallTilesList = new List<GameObject>();
 
-
-    private Color colorWall = Color.white;
-    private Color colorRoad = Color.black;
-
     private float unitPerPixel;
 
     private List<LevelData> levels;
     public int currentLevelIndex = 0;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(this);
         LoadLevels();
         LoadLevel(currentLevelIndex);
@@ -93,6 +90,17 @@ public class LevelManager : MonoBehaviour
         {
             Debug.LogError("Failed to load Level 3.");
         }
+
+        LevelData level4 = LoadLevelDataFromJSON("Level4.json");
+        if (level4 != null)
+        {
+            levels.Add(level4);
+            Debug.Log("Level 4 loaded successfully.");
+        }
+        else
+        {
+            Debug.LogError("Failed to load Level 4.");
+        }
         // Add more levels as needed
     }
 
@@ -137,9 +145,6 @@ public class LevelManager : MonoBehaviour
 
         unitPerPixel = prefabWallTile.transform.lossyScale.x;
         float halfUnitPerPixel = unitPerPixel / 2f;
-
-        // Calculate the offset based on the level index
-        // float xOffset = levelIndex * levelData.width * unitPerPixel;
 
         for (int row = 0; row < levelData.height; row++)
         {
