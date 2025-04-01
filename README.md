@@ -1,58 +1,58 @@
-# 🎮 Swirley - Yol Boyama Oyunu
+# 🎮 Swirley - Path Painting Game
 
 <div align="center">
   <img src="Assets/Textures/icon.png" alt="Swirley Logo" width="200"/>
   
-  *Yolları boya, seviyeleri tamamla! 🎨*
+  *Paint the paths, complete the levels! 🎨*
 </div>
 
-## 🎯 Oyun Hakkında
+## 🎯 About The Game
 
-Swirley, eğlenceli ve bağımlılık yapıcı bir yol boyama oyunudur! Parmak hareketlerinizle topu yönlendirerek yolları boyayın, engelleri aşın ve tüm seviyeleri tamamlayın.
+Swirley is an addictive and fun path painting game! Guide the ball with your finger movements, paint the paths, avoid obstacles, and complete all levels.
 
-### 🌟 Özellikler
+### 🌟 Features
 
-- 🎯 Dokunmatik kontroller
-- 🎨 Renkli yol boyama mekanikleri
-- 🎮 4 farklı seviye
-- 🎵 Etkileşimli ses efektleri
-- 🏆 Seviye sistemi
+- 🎯 Touch controls
+- 🎨 Colorful path painting mechanics
+- 🎮 4 different levels
+- 🎵 Interactive sound effects
+- 🏆 Level system
 
-## 🛠️ Teknik Detaylar
+## 🛠️ Technical Details
 
-Bu proje Unity 2022.3 LTS sürümü ile geliştirilmiştir. Kullanılan önemli paketler:
+This project was developed with Unity 2022.3 LTS. Key packages used:
 
-- DOTween - Animasyonlar için
-- TextMesh Pro - UI elementleri için
-- Newtonsoft.Json - Seviye verilerinin yönetimi için
+- DOTween - For animations
+- TextMesh Pro - For UI elements
+- Newtonsoft.Json - For level data management
 
-## 🎮 Nasıl Oynanır?
+## 🎮 How to Play
 
-1. Topu parmağınızla kaydırarak yönlendirin
-2. Geçtiğiniz yollar otomatik olarak boyanır
-3. Duvarlara çarpmamaya dikkat edin
-4. Tüm yolları boyayarak seviyeyi tamamlayın
+1. Guide the ball by swiping your finger
+2. Paths are automatically painted as you move
+3. Avoid hitting the walls
+4. Complete the level by painting all paths
 
-## 🚀 Geliştirme
+## 🚀 Development
 
-Projeyi Unity'de açmak için:
+To open the project in Unity:
 
-1. Unity Hub'ı açın
-2. "Add" butonuna tıklayın
-3. Bu projenin bulunduğu klasörü seçin
-4. Unity 2022.3 LTS sürümü ile açın
+1. Open Unity Hub
+2. Click "Add"
+3. Select the folder containing this project
+4. Open with Unity 2022.3 LTS
 
-## 📝 Lisans
+## 📝 License
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-1. Bu repository'yi fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/yeniOzellik`)
-3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik eklendi'`)
-4. Branch'inizi push edin (`git push origin feature/yeniOzellik`)
-5. Pull Request oluşturun
+1. Fork this repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ---
 
