@@ -1,7 +1,6 @@
 # 🎮 Swirley - Path Painting Game
 
 <div align="center">
-  <img src="Assets/Textures/icon.png" alt="Swirley Logo" width="200"/>
   
   *Paint the paths, complete the levels! 🎨*
 </div>
